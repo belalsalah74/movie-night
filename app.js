@@ -29,10 +29,8 @@ btn.addEventListener("click", function () {
   if (genre) {
     let url = `https://moviesdatabase.p.rapidapi.com/titles?endYear=${endYear.value}&startYear=${startYear.value}&genre=${genre}`;
     inputsDiv.className = "inputs fade";
-    btn.className = "btn-submit fade";
+    inputsDiv.remove()
     addSpinner();
-    // console.log(startYear.value);
-    // console.log(endYear.value);
 
     getData(url)
       .catch((e) =>
@@ -78,7 +76,7 @@ function getData(url) {
       if (response.ok) {
         return response.json();
       } else {
-        inputsDiv.appendChild(
+        document.body.appendChild(
           document.createTextNode("Something went wrong please try again")
         );
       }
@@ -105,14 +103,14 @@ function getData(url) {
 // Append movies to the page
 function addMovieDetails(movie) {
   const name = `${movie.titleText.text} (${movie.releaseYear.year})`;
-  const img = movie.primaryImage.url;
+  const img = movie.primaryImage? movie.primaryImage.url : null;
   const url = `https://www.imdb.com/title/${movie.id}`;
   createMovieElement(name, url, img);
 }
 
 function createMovieElement(name, url, img = null) {
   const movieDiv = document.createElement("div");
-  movieDiv.className = "movie-div";
+  movieDiv.className = "fade movie-div";
   removeSpinner();
   container.appendChild(movieDiv);
   movieDiv.classList.remove("fade");
@@ -120,7 +118,7 @@ function createMovieElement(name, url, img = null) {
   movieName.className = "movie-name";
   movieName.textContent = name;
   movieDiv.appendChild(movieName);
-  
+
   if (img) {
     const movieImg = document.createElement("img");
     movieImg.className = "movie-img";
