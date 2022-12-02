@@ -125,9 +125,11 @@ input {
     text-transform: capitalize;
     width: 300px;
 }
-label{
+
+label {
     text-align: left;
 }
+
 .btn-submit {
     border: 0;
     outline: 0;
@@ -228,17 +230,18 @@ label{
 @media screen and (max-width:500px) {
 
     h1 {
-        font-size: 50px;
+        font-size: 40px;
+        margin: 30px auto;
     }
 
     .movie-name {
-        font-size: 30px;
+        font-size: 25px;
     }
 
     select,
     input,
     .btn-submit {
-        font-size: 16px;
+        font-size: 14px;
 
     }
 
@@ -250,8 +253,12 @@ label{
 
     .input {
         flex-direction: column;
-        row-gap: 10px;
+        row-gap: 5px;
 
+    }
+
+    .inputs {
+        margin-bottom: 20px;
     }
 
 }
