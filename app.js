@@ -5,7 +5,7 @@ const endYear = document.getElementById("end-year");
 const btn = document.querySelector(".btn-submit");
 const inputsDiv = document.querySelector(".inputs");
 const container = document.querySelector(".container");
-const movieDiv = document.querySelector(".movie-div");
+
 const movies = [];
 const options = {
   method: "GET",
@@ -31,9 +31,9 @@ btn.addEventListener("click", function () {
     inputsDiv.className = "inputs fade";
     btn.className = "btn-submit fade";
     addSpinner();
-    console.log(startYear.value);
-    console.log(endYear.value);
-    
+    // console.log(startYear.value);
+    // console.log(endYear.value);
+
     getData(url)
       .catch((e) =>
         inputsDiv.appendChild(
@@ -73,52 +73,70 @@ function getData(url) {
       document.body.appendChild(errorMsg);
     })
     .then(function (response) {
-      return response.json();
+      console.log(response);
+
+      if (response.ok) {
+        return response.json();
+      } else {
+        inputsDiv.appendChild(
+          document.createTextNode("Something went wrong please try again")
+        );
+      }
     })
 
     .then(function (response) {
-      console.log(response);
+      // console.log(response);
 
       let urlBase = "https://moviesdatabase.p.rapidapi.com/";
-
-      if (response.page == 11) return response;
 
       response.results.forEach((r) => {
         movies.push(r);
       });
-
-      if (response.next != "") {
-        return getData(`${urlBase}${response.next}`);
+      while (response.page < 11) {
+        if (response.next != "") {
+          return getData(`${urlBase}${response.next}`);
+        }
       }
+      return response;
     });
 
   return promise;
 }
 // Append movies to the page
 function addMovieDetails(movie) {
-  removeSpinner();
+  const name = `${movie.titleText.text} (${movie.releaseYear.year})`;
+  const img = movie.primaryImage.url;
+  const url = `https://www.imdb.com/title/${movie.id}`;
+  createMovieElement(name, url, img);
+}
 
+function createMovieElement(name, url, img = null) {
+  const movieDiv = document.createElement("div");
+  movieDiv.className = "movie-div";
+  removeSpinner();
+  container.appendChild(movieDiv);
+  movieDiv.classList.remove("fade");
   const movieName = document.createElement("h2");
   movieName.className = "movie-name";
-  movieName.textContent = `${movie["titleText"]["text"]} ${movie["releaseYear"]["year"]}`;
+  movieName.textContent = name;
   movieDiv.appendChild(movieName);
-
-  if (movie["primaryImage"]) {
+  
+  if (img) {
     const movieImg = document.createElement("img");
     movieImg.className = "movie-img";
-    movieImg.src = movie["primaryImage"]["url"];
+    movieImg.src = img;
     movieDiv.appendChild(movieImg);
   }
   const movieURL = document.createElement("a");
   movieURL.className = "movie-url";
   movieURL.innerHTML = `IMDB <img src="./arrow-up-right-from-square-solid.svg" class="arrow">`;
-  movieURL.href = `https://www.imdb.com/title/${movie["id"]}`;
+  movieURL.href = url;
   movieURL.target = "_blank";
-
   movieDiv.appendChild(movieURL);
   const reload = document.createElement("a");
   reload.className = "reload";
   reload.innerHTML = `Reload <img src="./rotate-right-solid.svg" alt="reload icon"> `;
+
   movieDiv.appendChild(reload);
   reload.onclick = () => {
     location.reload();

@@ -96,11 +96,24 @@ span {
 
 
 .inputs.fade,
-.btn-submit.fade,
-.movie-div.fade {
+.btn-submit.fade {
     opacity: 0;
     transition: all 200ms ease-in;
     max-height: 0;
+}
+
+.inputs,
+.movie-div {
+    animation: fade 300ms ease-in-out
+}
+
+@keyframes fade {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }
 
 input:focus,
