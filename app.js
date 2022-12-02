@@ -100,6 +100,7 @@ function addMovieDetails(movie) {
 
   movieDiv.appendChild(movieURL);
   const reload = document.createElement("a");
+  reload.href = "#"; // To do
   reload.textContent = "reload";
   movieDiv.appendChild(reload);
 }
