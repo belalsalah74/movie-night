@@ -29,8 +29,11 @@ btn.addEventListener("click", function () {
   if (genre) {
     let url = `https://moviesdatabase.p.rapidapi.com/titles?endYear=${endYear.value}&startYear=${startYear.value}&genre=${genre}`;
     inputsDiv.className = "inputs fade";
-    inputsDiv.remove()
-    addSpinner();
+
+    setTimeout(() => {
+      inputsDiv.remove();
+      addSpinner();
+    }, 300);
 
     getData(url)
       .catch((e) =>
@@ -103,7 +106,7 @@ function getData(url) {
 // Append movies to the page
 function addMovieDetails(movie) {
   const name = `${movie.titleText.text} (${movie.releaseYear.year})`;
-  const img = movie.primaryImage? movie.primaryImage.url : null;
+  const img = movie.primaryImage ? movie.primaryImage.url : null;
   const url = `https://www.imdb.com/title/${movie.id}`;
   createMovieElement(name, url, img);
 }

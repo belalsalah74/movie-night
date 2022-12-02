@@ -98,7 +98,7 @@ span {
 .inputs.fade,
 .btn-submit.fade {
     opacity: 0;
-    transition: all 200ms ease-in;
+    transition: all 300ms ease-in;
     max-height: 0;
 }
 
@@ -108,10 +108,11 @@ span {
 }
 
 @keyframes fade {
-    from{
+    from {
         opacity: 0;
     }
-    to{
+
+    to {
         opacity: 1;
     }
 }
