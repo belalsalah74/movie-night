@@ -95,7 +95,9 @@ span {
 }
 
 
-.inputs.fade {
+.inputs.fade,
+.btn-submit.fade,
+.movie-div.fade {
     opacity: 0;
     transition: all 200ms ease-in;
     max-height: 0;
@@ -114,7 +116,6 @@ input,
 
 select,
 input {
-    width: 100px;
     border: none;
     outline: none;
     border-radius: 10px;
@@ -122,8 +123,11 @@ input {
     font-size: 20px;
     padding: 5px 10px;
     text-transform: capitalize;
+    width: 300px;
 }
-
+label{
+    text-align: left;
+}
 .btn-submit {
     border: 0;
     outline: 0;
@@ -136,6 +140,8 @@ input {
     cursor: pointer;
     margin-top: 40px;
     margin-bottom: 10px;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .btn-submit:hover,
@@ -184,7 +190,8 @@ input {
     margin-bottom: 10px;
 }
 
-.reload img {
+.reload img,
+.arrow {
     width: 15px;
     filter: invert();
     vertical-align: middle;

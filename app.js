@@ -1,7 +1,8 @@
 const selectGenre = document.getElementById("genres");
 let genre;
 const startYear = document.getElementById("start-year").value || 2000;
-const endYear = document.getElementById("start-year").value || 2022;
+const endYear =
+  document.getElementById("start-year").value || new Date().getFullYear();
 const btn = document.querySelector(".btn-submit");
 const inputsDiv = document.querySelector(".inputs");
 const container = document.querySelector(".container");
@@ -25,9 +26,8 @@ selectGenre.addEventListener("change", function (event) {
 btn.addEventListener("click", function () {
   if (genre) {
     let url = `https://moviesdatabase.p.rapidapi.com/titles?endYear=${endYear}&startYear=${startYear}&genre=${genre}`;
-    // inputsDiv.style.display = "none";
     inputsDiv.className = "inputs fade";
-    btn.style.display = "none";
+    btn.className = "btn-submit fade";
     addSpinner();
 
     getData(url)
@@ -83,7 +83,7 @@ function getData(url) {
         movies.push(r);
       });
 
-      if (response.next != '') {
+      if (response.next != "") {
         return getData(`${urlBase}${response.next}`);
       }
     });
@@ -107,8 +107,9 @@ function addMovieDetails(movie) {
   }
   const movieURL = document.createElement("a");
   movieURL.className = "movie-url";
-  movieURL.textContent = "IMDB";
+  movieURL.innerHTML = `IMDB <img src="./arrow-up-right-from-square-solid.svg" class="arrow">`;
   movieURL.href = `https://www.imdb.com/title/${movie["id"]}`;
+  movieURL.target = "_blank";
 
   movieDiv.appendChild(movieURL);
   const reload = document.createElement("a");
