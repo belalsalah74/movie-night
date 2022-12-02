@@ -8,41 +8,44 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;1,400&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="favicon.ico" />
   </head>
   <body>
-    <div class="container">
-      <h1>Suggest Me a Movie!</h1>
-      <div class="inputs">
-        <div class="input">
-          <label for="genres">Choose genre</label>
-          <select name="genres" id="genres">
-            <option class="option">----</option>
-            <!-- <option value="">action</option> -->
-          </select>
+    <main>
+      <div class="container">
+        <h1>
+          Suggest Me a Movie!
+          <img src="./1407328704.png" alt="pop corn illustration" />
+        </h1>
+        <div class="inputs">
+          <div class="input">
+            <label for="genres">Choose genre</label>
+            <select name="genres" id="genres" required >
+              <option class="option" value="" selected disabled >----</option>
+            </select>
+          </div>
+          <div class="input">
+            <label for="start-year">Enter start year<small></small></label>
+            <input
+              type="number"
+              id="start-year"
+              placeholder="Default is 2000"
+            />
+          </div>
+          <div class="input">
+            <label for="end-year">Enter end year<small></small></label>
+            <input type="number" id="end-year" placeholder="Default is 2022" />
+          </div>
         </div>
-        <div class="input">
-          <label for="start-year"
-            >Enter start year <small>Default is 2023</small></label
-          >
-          <input type="number" id="start-year" />
-        </div>
-        <div class="input">
-          <label for="end-year"
-            >Enter end year <small>Default is 2022</small></label
-          >
-
-          <input type="number" id="end-year" />
-        </div>
+        <div class="movie-div"></div>
+        <button class="btn-submit">Submit</button>
       </div>
-
-      <div class="movie-div"></div>
-      <button class="btn-submit">Submit</button>
-    </div>
+      <!-- <a href="#" class="reload"></a> -->
+    </main>
     <script src="app.js"></script>
   </body>
 </html>

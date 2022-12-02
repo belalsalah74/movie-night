@@ -7,9 +7,25 @@
 }
 
 body {
-    font-family: 'Anek Devanagari', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 30px;
-    background-color: rgb(232, 244, 248);
+    background-color: #1d1d1d;
+    color: #fefefe;
+
+}
+
+main::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./background.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: .07;
+    z-index: -1;
 }
 
 li {
@@ -35,12 +51,19 @@ h1 {
     font-style: italic;
 }
 
+h1 img {
+    width: 70px;
+    vertical-align: middle;
+}
+
+
 .inputs {
 
     display: flex;
     flex-direction: column;
     gap: 50px;
     width: 100%;
+    animation: fade 200ms ease-in 1;
 
 }
 
@@ -66,7 +89,27 @@ span {
     column-gap: 50px;
     margin-bottom: 200px;
     margin: auto;
-    width: 50%;
+    opacity: 1;
+    max-height: auto;
+}
+
+
+.inputs.fade
+ {
+    opacity: 0;
+    transition: all 200ms ease-in;
+    max-height: 0;
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid rgb(15, 190, 221);
+}
+
+select,
+input,
+.btn-submit {
+    min-width: 200px;
 }
 
 select,
@@ -74,7 +117,7 @@ input {
     width: 100px;
     border: none;
     outline: none;
-    border-radius: 15px;
+    border-radius: 10px;
     font: inherit;
     font-size: 20px;
     padding: 5px 10px;
@@ -87,7 +130,7 @@ input {
     background-color: navy;
     color: white;
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: 15px;
     font: inherit;
     font-size: 20px;
     cursor: pointer;
@@ -103,11 +146,15 @@ input {
 .movie-div {
     width: 80%;
     text-align: center;
+
+    transform: scale(1);
+    transition: transform 200ms ease-in;
 }
+
 
 .movie-name {
     font-size: 50px;
-    color: navy;
+    color: whitesmoke;
     text-transform: capitalize;
     margin-bottom: 20px;
 }
@@ -119,16 +166,33 @@ input {
 .movie-url {
     display: block;
     cursor: pointer;
-    color: navy;
+    color: whitesmoke;
     font-size: 30px;
 }
 
 .movie-url:hover {
-   color: rgb(63, 63, 174);
+    color: white;
 }
 
 
+.reload {
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
 
+.reload img {
+    width: 15px;
+    filter: invert();
+    vertical-align: middle;
+}
+
+.reload:hover {
+    color: whitesmoke;
+}
 
 #loading {
     display: inline-block;
@@ -136,7 +200,7 @@ input {
     height: 50px;
     border: 3px solid rgba(255, 255, 255, .3);
     border-radius: 50%;
-    border-top-color: navy;
+    border-top-color: white;
     animation: spin 1s ease-in-out infinite;
     -webkit-animation: spin 1s ease-in-out infinite;
 }
@@ -151,4 +215,36 @@ input {
     to {
         -webkit-transform: rotate(360deg);
     }
+}
+
+
+@media screen and (max-width:500px) {
+
+    h1 {
+        font-size: 50px;
+    }
+
+    .movie-name {
+        font-size: 30px;
+    }
+
+    select,
+    input,
+    .btn-submit {
+        font-size: 16px;
+
+    }
+
+    small,
+    input::placeholder {
+        font-size: 10px;
+        display: block;
+    }
+
+    .input {
+        flex-direction: column;
+        row-gap: 10px;
+
+    }
+
 }

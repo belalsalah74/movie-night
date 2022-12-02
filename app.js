@@ -23,22 +23,27 @@ selectGenre.addEventListener("change", function (event) {
 });
 
 btn.addEventListener("click", function () {
-  let url = `https://moviesdatabase.p.rapidapi.com/titles?endYear=${endYear}&startYear=${startYear}&genre=${genre}`;
-  inputsDiv.style.display = "none";
-  btn.style.display = "none";
-  addSpinner();
+  if (genre) {
+    let url = `https://moviesdatabase.p.rapidapi.com/titles?endYear=${endYear}&startYear=${startYear}&genre=${genre}`;
+    // inputsDiv.style.display = "none";
+    inputsDiv.className = "inputs fade";
+    btn.style.display = "none";
+    addSpinner();
 
-  getData(url)
-    .catch((e) =>
-      inputsDiv.appendChild(
-        document.createTextNode("Something went wrong please try again")
+    getData(url)
+      .catch((e) =>
+        inputsDiv.appendChild(
+          document.createTextNode("Something went wrong please try again")
+        )
       )
-    )
-    .then(function () {
-      const random = Math.floor(Math.random() * movies.length);
-      const movie = movies[random];
-      addMovieDetails(movie);
-    });
+      .then(function () {
+        const random = Math.floor(Math.random() * movies.length);
+        const movie = movies[random];
+        addMovieDetails(movie);
+      });
+  } else {
+    selectGenre.style.outline = "2px solid red";
+  }
 });
 
 // Get available genres
@@ -58,11 +63,18 @@ function getAvailableGenres() {
 // Get Movies list
 function getData(url) {
   const promise = fetch(url, options)
+    .catch((e) => {
+      const errorMsg = document.createElement("p");
+      errorMsg.textContent = "Something went wrong please try again";
+      document.body.appendChild(errorMsg);
+    })
     .then(function (response) {
       return response.json();
     })
+
     .then(function (response) {
       console.log(response);
+
       let urlBase = "https://moviesdatabase.p.rapidapi.com/";
 
       if (response.page == 11) return response;
@@ -71,7 +83,7 @@ function getData(url) {
         movies.push(r);
       });
 
-      if (response.next) {
+      if (response.next != '') {
         return getData(`${urlBase}${response.next}`);
       }
     });
@@ -100,9 +112,12 @@ function addMovieDetails(movie) {
 
   movieDiv.appendChild(movieURL);
   const reload = document.createElement("a");
-  reload.href = "#"; // To do
-  reload.textContent = "reload";
+  reload.className = "reload";
+  reload.innerHTML = `Reload <img src="./rotate-right-solid.svg" alt="reload icon"> `;
   movieDiv.appendChild(reload);
+  reload.onclick = () => {
+    location.reload();
+  };
 }
 
 function addSpinner() {
