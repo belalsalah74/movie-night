@@ -1,8 +1,7 @@
 const selectGenre = document.getElementById("genres");
 let genre;
-const startYear = document.getElementById("start-year").value || 2000;
-const endYear =
-  document.getElementById("start-year").value || new Date().getFullYear();
+const startYear = document.getElementById("start-year");
+const endYear = document.getElementById("end-year");
 const btn = document.querySelector(".btn-submit");
 const inputsDiv = document.querySelector(".inputs");
 const container = document.querySelector(".container");
@@ -16,6 +15,9 @@ const options = {
   },
 };
 
+endYear.value = new Date().getFullYear();
+startYear.value = 2000;
+
 // Load generes
 getAvailableGenres();
 // Get choosen genre
@@ -25,11 +27,13 @@ selectGenre.addEventListener("change", function (event) {
 
 btn.addEventListener("click", function () {
   if (genre) {
-    let url = `https://moviesdatabase.p.rapidapi.com/titles?endYear=${endYear}&startYear=${startYear}&genre=${genre}`;
+    let url = `https://moviesdatabase.p.rapidapi.com/titles?endYear=${endYear.value}&startYear=${startYear.value}&genre=${genre}`;
     inputsDiv.className = "inputs fade";
     btn.className = "btn-submit fade";
     addSpinner();
-
+    console.log(startYear.value);
+    console.log(endYear.value);
+    
     getData(url)
       .catch((e) =>
         inputsDiv.appendChild(
