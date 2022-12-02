@@ -1,0 +1,154 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Anek Devanagari', sans-serif;
+    font-size: 30px;
+    background-color: rgb(232, 244, 248);
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 70px;
+    text-align: center;
+    margin: 40px;
+    font-style: italic;
+}
+
+.inputs {
+
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+
+}
+
+label,
+select {
+    display: block;
+}
+
+small,
+span {
+    display: inline-block;
+    font-weight: 100;
+    font-size: 12px;
+    color: darkgray;
+}
+
+
+.input {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 250px;
+    column-gap: 50px;
+    margin-bottom: 200px;
+    margin: auto;
+    width: 50%;
+}
+
+select,
+input {
+    width: 100px;
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    font: inherit;
+    font-size: 20px;
+    padding: 5px 10px;
+    text-transform: capitalize;
+}
+
+.btn-submit {
+    border: 0;
+    outline: 0;
+    background-color: navy;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font: inherit;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.btn-submit:hover,
+.btn-submit:focus {
+    background-color: rgb(63, 63, 174);
+}
+
+.movie-div {
+    width: 80%;
+    text-align: center;
+}
+
+.movie-name {
+    font-size: 50px;
+    color: navy;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.movie-img {
+    max-width: 50%;
+}
+
+.movie-url {
+    display: block;
+    cursor: pointer;
+    color: navy;
+    font-size: 30px;
+}
+
+.movie-url:hover {
+   color: rgb(63, 63, 174);
+}
+
+
+
+
+#loading {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    border-top-color: navy;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
